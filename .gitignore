@@ -170,3 +170,5 @@ cython_debug/
 
 ./downloads
 ./test_downloads
+
+.env

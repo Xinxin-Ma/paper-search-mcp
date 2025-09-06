@@ -1,17 +1,10 @@
-version: '3.8'
-
 services:
   paper-digest:
     build:
       context: .
       dockerfile: Dockerfile.digest
     container_name: daily-paper-digest
-    environment:
-      - SMTP_SERVER=smtp.gmail.com
-      - SMTP_PORT=587
-      - EMAIL_USER=${EMAIL_USER}
-      - EMAIL_PASS=${EMAIL_PASS}
-      - RECIPIENT_EMAIL=${RECIPIENT_EMAIL}
     volumes:
+      - ./output:/app/output
       - ./logs:/var/log
     restart: unless-stopped
