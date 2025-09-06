@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "paper_search_server": {
+      "command": "python",
+      "args": [
+        "-m",
+        "paper_search_mcp.server"
+      ],
+      "cwd": "/mnt/d/Xinxin/Codes/paper-search-mcp",
+      "env": {
+        "SEMANTIC_SCHOLAR_API_KEY": ""
+      }
+    }
+  }
+}
