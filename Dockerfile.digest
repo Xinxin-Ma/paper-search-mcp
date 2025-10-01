@@ -16,10 +16,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Create cron job - runs daily at 9 AM US Eastern (13:00 UTC) using secure file version
-RUN echo "0 13 * * * cd /app && /usr/local/bin/python daily_digest_file.py >> /var/log/digest.log 2>&1" | crontab -
+# RUN echo "0 13 * * * cd /app && /usr/local/bin/python daily_digest_file.py >> /var/log/digest.log 2>&1" | crontab -
 
 # Create log file and ensure proper permissions
-RUN mkdir -p /var/log && touch /var/log/digest.log
+# RUN mkdir -p /var/log && touch /var/log/digest.log
 
 # Start script that initializes cron and creates log file
-CMD ["sh", "-c", "cron && echo 'Cron started, waiting for scheduled run at 9 AM US Eastern (1 PM UTC)...' > /var/log/digest.log && tail -f /var/log/digest.log"]
+# CMD ["sh", "-c", "cron && echo 'Cron started, waiting for scheduled run at 9 AM US Eastern (1 PM UTC)...' > /var/log/digest.log && tail -f /var/log/digest.log"]
