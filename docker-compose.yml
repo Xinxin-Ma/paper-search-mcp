@@ -1,4 +1,25 @@
 services:
+  # MCP Server
+  paper-search-mcp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: paper-search-mcp
+    image: paper-search-mcp:latest
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./output:/app/output
+      - ./logs:/app/logs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import paper_search_mcp; print('healthy')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+  # Daily Paper Digest Service (optional, if Dockerfile.digest exists)
   paper-digest:
     build:
       context: .
@@ -14,3 +35,5 @@ services:
       - ./output:/app/output
       - ./logs:/var/log
     restart: unless-stopped
+    profiles:
+      - digest
