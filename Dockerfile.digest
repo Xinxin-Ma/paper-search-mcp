@@ -15,7 +15,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy application code
 COPY . .
 
-# Create cron job - runs daily at 9 AM US Eastern (13:00 UTC) using secure file version
+# Create cron job - runs daily at 9 AM US Eastern (13:00 UTC) using updated file version
 RUN echo "0 13 * * * cd /app && /usr/local/bin/python daily_digest_file.py >> /var/log/digest.log 2>&1" | crontab -
 
 # Create log file and ensure proper permissions

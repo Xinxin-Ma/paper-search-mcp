@@ -8,6 +8,15 @@ services:
     image: paper-search-mcp:latest
     stdin_open: true
     tty: true
+    environment:
+      - SMTP_SERVER=${SMTP_SERVER:-smtp.gmail.com}
+      - SMTP_PORT=${SMTP_PORT:-587}
+      - EMAIL_SENDER=${EMAIL_SENDER}
+      - EMAIL_PASSWORD=${EMAIL_PASSWORD}
+      - EMAIL_RECIPIENT=${EMAIL_RECIPIENT}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - CLAUDE_MODEL=${CLAUDE_MODEL}
+      - CLAUDE_MAX_TOKENS=${CLAUDE_MAX_TOKENS}
     volumes:
       - ./output:/app/output
       - ./logs:/app/logs
@@ -24,16 +33,17 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.digest
-    container_name: daily-paper-digest
+    container_name: paper-search-daily-digest
     environment:
       - SMTP_SERVER=${SMTP_SERVER:-smtp.gmail.com}
       - SMTP_PORT=${SMTP_PORT:-587}
-      - EMAIL_USER=${EMAIL_USER}
-      - EMAIL_PASS=${EMAIL_PASS}
-      - RECIPIENT_EMAIL=${RECIPIENT_EMAIL}
+      - EMAIL_SENDER=${EMAIL_SENDER}
+      - EMAIL_PASSWORD=${EMAIL_PASSWORD}
+      - EMAIL_RECIPIENT=${EMAIL_RECIPIENT}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - CLAUDE_MODEL=${CLAUDE_MODEL}
+      - CLAUDE_MAX_TOKENS=${CLAUDE_MAX_TOKENS}
     volumes:
       - ./output:/app/output
       - ./logs:/var/log
     restart: unless-stopped
-    profiles:
-      - digest
